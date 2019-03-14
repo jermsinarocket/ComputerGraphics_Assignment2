@@ -1,7 +1,6 @@
-# ComputerGraphics_Assignment2 - Work in Progress
-CSED451 Computer Graphics Assignment 2
+# CSED451 Computer Graphics Assignment 2 - Work in Progress
 
-Developing a 2D volleyball game
+Enhancing a 2D volleyball game usihng Hierarchical Model
 
 ## Language(s) used
 * C++
