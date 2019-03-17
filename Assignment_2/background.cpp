@@ -12,27 +12,42 @@
 #include "background.h"
 
 Background::Background() {
+	//For Cloud Rotation
+	cloudRotationAngle = CLOUD_ROTATION_ANGLE;
+	totalRotations = TOTAL_ROTATIONS;
+	upwards = UPWARDS;
+
+	//For Cloud Movement
+	cloudMoveSpeed = CLOUD_MOVE_SPEED;
+	totalMovements = TOTAL_MOVEMENTS;
+	left = LEFT;
 }
 
 void Background::render() {
 	
 	sun();
-	
-	glPushMatrix();
-		glScalef(0.8f,0.8f,1.0f);
-		cloud();
-	glPopMatrix();
 
 	glPushMatrix();
-		glScalef(0.9f, 0.9f, 1.0f);
-		glTranslatef(0.5, -0.2, 0.0f);
-		cloud();
-	glPopMatrix();
 
-	glPushMatrix();
-		glScalef(0.7f, 0.7f, 1.0f);
-		glTranslatef(1.08f, 0.3f, 0.0f);
+		moveCloud();
+
+		//First Cloud
 		cloud();
+
+		//Second Cloud
+		glPushMatrix();
+			glScalef(CLOUD_FAR, CLOUD_FAR, 0);
+			glTranslatef(0.6f,0,0);
+			cloud();
+		glPopMatrix();
+		
+		//Third Cloud
+		glPushMatrix();
+			glScalef(CLOUD_NEAR, CLOUD_NEAR, 0);
+			glTranslatef(0.8f, 0.05f, 0);
+			cloud();
+		glPopMatrix();
+
 	glPopMatrix();
 
 }
@@ -61,22 +76,82 @@ void Background::sun() {
 void Background::cloud() {
 
 	Color color;
-
 	color.setColor("FFFFFF");
-
 	glColor3f(SETCOLOR(color));
 
 	glPushMatrix();
-		Shapes::rectangle(-0.2f, 0.6, 0.05f, 0.73f);
+		//Top Cloud
+		Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
+
+		//Left Cloud
+		glPushMatrix();
+			glTranslatef(-0.05, -0.12f, 0.0f);
+			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
+		glPopMatrix();
+
+		//Right Cloud
+		glPushMatrix();
+			glTranslatef(0.05, -0.12f, 0.0f);
+			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
+		glPopMatrix();
+
+		//Moving Left Cloud
+		glPushMatrix();
+			rotateCloud();
+			glTranslatef(-0.08, -0.05f, 0.0f);
+			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
+		glPopMatrix();
+
+		//Moving Right Cloud
+		glPushMatrix();
+			rotateCloud();
+			glTranslatef(0.08, -0.05f, 0.0f);
+			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
+		glPopMatrix();
 	glPopMatrix();
 
-	glPushMatrix();
-		Shapes::rectangle(-0.15f, 0.6, 0.0f, 0.79f);
-	glPopMatrix();
+
+}
+
+void Background::rotateCloud() {
+
+	if (upwards) {
+		glTranslatef(0.0f, cloudRotationAngle += 0.0005, 0.0);
+		++totalRotations;
+	}
+	else{
+		glTranslatef(0.0f, cloudRotationAngle -= 0.0005, 0.0);
+		--totalRotations;
+	}
+	
+	if (totalRotations == 125) {
+		upwards = false;
+	}else if (totalRotations == 0) {
+		upwards = true;
+	}
+
+}
+
+void Background::moveCloud() {
+
+	if (left) {
+		glTranslatef(cloudMoveSpeed -= 0.0005f, 0.0f, 0.0f);
+		++totalMovements;
+	}
+	else {
+		glTranslatef(cloudMoveSpeed += 0.0005f, 0.0f, 0.0f);
+		--totalMovements;
+	}
+
+	if (totalMovements == 400) {
+		left = false;
+	}
+	else if (totalMovements == 0) {
+		left = true;
+	}
 
 }
 
 Background::~Background()
 {
-	//dtor
 }

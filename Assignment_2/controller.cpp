@@ -27,7 +27,7 @@ void Controller::renderStart() {
 		//Boundary Box
 		ballCollision.render();
 
-		bg.render();
+		//bg.render();
 
 		//Render the Net
 		Net net;

@@ -40,7 +40,7 @@ void Player::render() {
 		glPopMatrix();
 	glPopMatrix();
 
-}
+
 
 
 
