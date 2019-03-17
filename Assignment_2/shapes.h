@@ -30,6 +30,7 @@ public:
 	static void circle(double ballX,double ballY,double radius, Color color);
 	static void quad(double x1, double y1, double x2, double y2, Color color);
 	static void rectangle(double x1, double y1, double x2, double y2);
+	static void triangle(double x1, double y1, double x2, double y2, double x3, double y3, Color color);
 	static void boundaryBox(double x1, double y1, double x2, double y2, Color color);
 	/** Default destructor */
 	virtual ~Shapes();

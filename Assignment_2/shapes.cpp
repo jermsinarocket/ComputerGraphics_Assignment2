@@ -59,6 +59,15 @@ void Shapes::boundaryBox(double x1, double y1, double x2, double y2,Color color)
 	glEnd();
 }
 
+void Shapes::triangle(double x1, double y1, double x2, double y2, double x3, double y3, Color color) {
+	glColor3f(SETCOLOR(color));
+	glBegin(GL_TRIANGLES);
+		glVertex3f(x1, y1,0);
+		glVertex3f(x2, y2,0);
+		glVertex3f(x3, y3,0);
+	glEnd();
+}
+
 Shapes::~Shapes()
 {
 	

@@ -19,6 +19,14 @@ Player::Player() {
 	playerY2 = PLAYER_Y2;
 	speed = PLAYER_SPEED;
 	score = 0;
+
+	bottomTailAngle = PLAYER_BOTTOM_TAIL_ANGLE;
+	bottomTailRotationCount = PLAYER_BOTTOM_TAIL_ROTATION_COUNT;
+	bottomTailUpwards = BOTTOM_TAIL_UPWARDS;
+
+	topTailAngle = PLAYER_TOP_TAIL_ANGLE;
+	topTailRotationCount = PLAYER_TOP_TAIL_ROTATION_COUNT;
+	topTailUpwards = TOP_TAIL_UPWARDS;
 }
 
 void Player::render() {
@@ -38,11 +46,32 @@ void Player::render() {
 			glTranslatef(0,0.33,0);
 			Shapes::circle(-((abs(playerX1) + abs(playerX2)) / 2), playerY1, 0.07, color);
 		glPopMatrix();
+
+		//First Part of Tail
+		glPushMatrix();	
+			//Rotate Bottom Tail
+		    glTranslatef(playerX1,playerY1,0);
+			rotateBottomTail();
+			glTranslatef(-playerX1, -playerY1, 0);
+
+			color.setColor("f4dc26");
+			glTranslatef(0.04, 0.05, 0);
+			Shapes::triangle(playerX1, playerY1, playerX1-0.09, playerY1+0.06, playerX1-0.07, playerY1+0.11, color);
+			
+			//Second Part of Tail
+			glPushMatrix();
+				//Rotation Top Tail
+				glTranslatef(playerX1, playerY1, 0);
+				rotateTopTail();
+				glTranslatef(-playerX1, -playerY1, 0);
+
+				color.setColor("5c3613");
+				glTranslatef(-0.07, 0.06, 0);
+				Shapes::triangle(playerX1, playerY1, playerX1 - 0.02, playerY1 + 0.12, playerX1 + 0.03, playerY1 + 0.15, color);
+			glPopMatrix();
+
+		glPopMatrix();
 	glPopMatrix();
-
-
-
-
 
 	//Check Left Window Collision
 	if (collision.leftWindowCollision(playerX1)) {
@@ -89,6 +118,45 @@ int Player::getScore() {
 	return score;
 }
 
+void Player::rotateBottomTail() {
+
+	if (bottomTailUpwards) {
+		glRotatef(bottomTailAngle += 0.5f, 0.0f, 0.0f, 1.0f);
+		++bottomTailRotationCount;
+	}
+	else {
+		glRotatef(bottomTailAngle -= 0.5f, 0.0f, 0.0f, 1.0f);
+		--bottomTailRotationCount;
+	}
+
+	if (bottomTailRotationCount == 60) {
+		bottomTailUpwards = false;
+	}
+	else if (bottomTailRotationCount == 0) {
+		bottomTailUpwards = true;
+	}
+
+}
+
+void Player::rotateTopTail() {
+
+	if (topTailUpwards) {
+		glRotatef(topTailAngle += 0.8f, 0.0f, 0.0f, 1.0f);
+		++topTailRotationCount;
+	}
+	else {
+		glRotatef(topTailAngle -= 0.8f, 0.0f, 0.0f, 1.0f);
+		--topTailRotationCount;
+	}
+
+	if (topTailRotationCount == 10) {
+		topTailUpwards = false;
+	}
+	else if (topTailRotationCount == 0) {
+		topTailUpwards = true;
+	}
+
+}
 
 //Reset Player
 void Player::resetAll() {

@@ -26,6 +26,14 @@
 //Can be changed to increase/decrease speed
 #define PLAYER_SPEED 0.01
 
+#define PLAYER_BOTTOM_TAIL_ANGLE 0.5
+#define PLAYER_BOTTOM_TAIL_ROTATION_COUNT 0
+#define BOTTOM_TAIL_UPWARDS TRUE
+
+#define PLAYER_TOP_TAIL_ANGLE 1.0
+#define PLAYER_TOP_TAIL_ROTATION_COUNT 0
+#define TOP_TAIL_UPWARDS TRUE
+
 class Player
 {
 public:
@@ -39,6 +47,8 @@ public:
 	void resetScore();
 	void resetAll();
 	int getScore();
+	void rotateBottomTail();
+	void rotateTopTail();
 	virtual ~Player();
 
 	double playerX1;
@@ -53,6 +63,13 @@ public:
 protected:
 private:
 	int score;
+	float bottomTailAngle;
+	int bottomTailRotationCount;
+	bool bottomTailUpwards;
+
+	float topTailAngle;
+	int topTailRotationCount;
+	bool topTailUpwards;
 };
 
 #endif // PLAYER_H
