@@ -80,29 +80,29 @@ void Background::cloud() {
 	glColor3f(SETCOLOR(color));
 
 	glPushMatrix();
-		//Top Cloud
+		//Top Cloud - 1st Level
 		Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
 
-		//Left Cloud
+		//Left Cloud - 2nd Level
 		glPushMatrix();
 			glTranslatef(-0.05, -0.12f, 0.0f);
 			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
 		glPopMatrix();
 
-		//Right Cloud
+		//Right Cloud - 2nd Level
 		glPushMatrix();
 			glTranslatef(0.05, -0.12f, 0.0f);
 			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
 		glPopMatrix();
 
-		//Moving Left Cloud
+		//Moving Left Cloud - 2nd Level
 		glPushMatrix();
 			rotateCloud();
 			glTranslatef(-0.08, -0.05f, 0.0f);
 			Shapes::circle(CLOUD_X, CLOUD_Y, CLOUD_RADIUS, color);
 		glPopMatrix();
 
-		//Moving Right Cloud
+		//Moving Right Cloud 2nd Level
 		glPushMatrix();
 			rotateCloud();
 			glTranslatef(0.08, -0.05f, 0.0f);

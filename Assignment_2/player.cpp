@@ -37,17 +37,19 @@ void Player::render() {
 	//Create the Player Bounding Box
 	Shapes::boundaryBox(playerX1, playerY1, playerX2, playerY2, color);
 
-	color.setColor("F6BD20");
+	
 	glPushMatrix();
+		color.setColor("F6BD20");
 		//Body of Pikachu - top level
 		Shapes::quad(playerX1, playerY1, playerX2, -0.74, color);
+
 		//Head of Pikachu - 2nd level
 		glPushMatrix();
 			glTranslatef(0,0.33,0);
 			Shapes::circle(-((abs(playerX1) + abs(playerX2)) / 2), playerY1, 0.07, color);
 		glPopMatrix();
 
-		//First Part of Tail
+		//First Part of Tail - 2nd Level
 		glPushMatrix();	
 			//Rotate Bottom Tail
 		    glTranslatef(playerX1,playerY1,0);
@@ -58,20 +60,19 @@ void Player::render() {
 			glTranslatef(0.04, 0.05, 0);
 			Shapes::triangle(playerX1, playerY1, playerX1-0.09, playerY1+0.06, playerX1-0.07, playerY1+0.11, color);
 			
-			//Second Part of Tail
+			//Second Part of Tail - 3rd Level
 			glPushMatrix();
-				//Rotation Top Tail
-				glTranslatef(playerX1, playerY1, 0);
+				//Rotation Top Tail - Fourth Level
+				glTranslatef(playerX1, playerY1, 0); //Translate to Origin
 				rotateTopTail();
-				glTranslatef(-playerX1, -playerY1, 0);
+				glTranslatef(-playerX1, -playerY1, 0); //Translate Back
 
 				color.setColor("5c3613");
 				glTranslatef(-0.07, 0.06, 0);
 				Shapes::triangle(playerX1, playerY1, playerX1 - 0.02, playerY1 + 0.12, playerX1 + 0.03, playerY1 + 0.15, color);
 			glPopMatrix();
-
 		glPopMatrix();
-	glPopMatrix();
+	glPopMatrix(); 
 
 	//Check Left Window Collision
 	if (collision.leftWindowCollision(playerX1)) {
