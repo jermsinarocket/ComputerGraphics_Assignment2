@@ -167,7 +167,7 @@ int main(int argc, char **argv){
 	glutSpecialFunc(specialKeyboard);
 
 	//Fullscreen mode
-	//glutFullScreen();
+	glutFullScreen();
 
 	glutMainLoop();
 

@@ -25,19 +25,24 @@ Ball::Ball() {
 
 int Ball::render() {
 
-	Color ballColor;
-	ballColor.setColor("398ec6");
-	Shapes::circle(ballX, ballY, ballRadius, ballColor); 
-	ballColor.setColor("ffffff");
+	glPushMatrix();
+		
+		//Ball - Top Level
+		Color ballColor;
+		ballColor.setColor("398ec6");
+		Shapes::circle(ballX, ballY, ballRadius, ballColor); 
 
-	/*
-	glColor3f(SETCOLOR(ballColor));
-		glBegin(GL_LINE_LOOP);
-		glVertex2f(ballX - 0.2, ballY - 0.2);
-		glVertex2f(ballX + 0.2, ballY - 0.2);
-		glVertex2f(ballX + 0.2, ballY + 0.2);
-		glVertex2f(ballX - 0.2, ballY + 0.2);
-	glEnd();*/
+		//Triangle within ball - 2nd Level
+		glPushMatrix();
+		ballColor.setColor("FF0000");
+		Shapes::triangle(ballX, ballY, ballX+ballRadius*cos(4.10152),ballY+ballRadius*sin(4.10152),ballX+ballRadius*cos(-0.959931089),ballY+ballRadius*sin(-0.959931089),ballColor);
+			//Electricity - 3rd Level
+			glPushMatrix();
+			glPopMatrix();
+
+		glPopMatrix();
+	glPopMatrix();
+
 
 	//Ball moves constantly at x,y speed
 	ballX += xSpeed;

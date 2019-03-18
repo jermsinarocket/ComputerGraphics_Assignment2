@@ -59,6 +59,11 @@ void Shapes::boundaryBox(double x1, double y1, double x2, double y2,Color color)
 	glEnd();
 }
 
+void Shapes::electricity(double x1, double x2,Color color) {
+
+}
+
+
 void Shapes::triangle(double x1, double y1, double x2, double y2, double x3, double y3, Color color) {
 	glColor3f(SETCOLOR(color));
 	glBegin(GL_TRIANGLES);
