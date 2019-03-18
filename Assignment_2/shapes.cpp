@@ -59,8 +59,20 @@ void Shapes::boundaryBox(double x1, double y1, double x2, double y2,Color color)
 	glEnd();
 }
 
-void Shapes::electricity(double x1, double x2,Color color) {
+void Shapes::electricity(double x1, double y1,double x2,double y2,Color color) {
 
+	double previousX = x1;
+
+	glColor3f(SETCOLOR(color));
+	glBegin(GL_LINE_STRIP);
+
+	for (double i = x1; i <= x2; i += (abs(x2) - abs(previousX)) * ((double)rand() / (double)RAND_MAX) + abs(previousX))
+	{
+		glVertex2f(i,  (abs(y2+0.05) - abs((y2-0.02))) * ((double)rand() / (double)RAND_MAX) + abs(y2-0.02));
+		previousX = i;
+		
+	}
+	glEnd();
 }
 
 

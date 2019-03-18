@@ -32,6 +32,8 @@
 #define BALL_xSpeed -0.006
 #define BALL_ySpeed -0.005
 
+#define ROTATION_ANGLE 1.0f;
+
 
 class Ball
 {
@@ -43,6 +45,7 @@ public:
 	void reverseBallX();
 	void reverseBallY();
 	void resetAll();
+	void rotateElectricity();
 
 	virtual ~Ball();
 
@@ -63,6 +66,7 @@ public:
 protected:
 private:
 	SoundController soundcontroller;
+	float rotationAngle;
 
 };
 
