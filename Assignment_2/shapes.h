@@ -33,6 +33,7 @@ public:
 	static void triangle(double x1, double y1, double x2, double y2, double x3, double y3, Color color);
 	static void boundaryBox(double x1, double y1, double x2, double y2, Color color);
 	static void electricity(double x1, double y1,double x2, double y2, Color color);
+	static void ellipse(double x, double y, double radiusX, double radiusY,Color color_btm, Color color_top);
 	/** Default destructor */
 	virtual ~Shapes();
 protected:

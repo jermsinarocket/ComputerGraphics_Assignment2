@@ -40,7 +40,6 @@ int Ball::render() {
 		glTranslatef(ballX,ballY,0.0f);
 		rotateElectricity();
 		glTranslatef(-ballX,-ballY,0.0f);
-
 		Shapes::triangle(ballX, ballY, ballX+ballRadius*cos(4.10152),ballY+ballRadius*sin(4.10152),ballX+ballRadius*cos(-0.959931089),ballY+ballRadius*sin(-0.959931089),ballColor);
 			//Electricity - 3rd Level
 			glPushMatrix();
@@ -53,8 +52,8 @@ int Ball::render() {
 
 
 	//Ball moves constantly at x,y speed
-	//ballX += xSpeed;
-	//ballY += ySpeed;
+	ballX += xSpeed;
+	ballY += ySpeed;
 	
 	if(zoom) {
 

@@ -56,10 +56,11 @@ void Controller::renderStart() {
 				ball.reverseBallX();
 				soundcontroller.playerBallSound();
 		}
-		
 
-		//testing
-		//ai.scoreAdd();
+		if (ballCollision.playBallCollision(player1.playerX1 - player1.speed, player1.playerX2 + player1.speed, player1.playerY2, ball.ballX, ball.ballY, ball.ballRadius)) {
+			player1.rotateColli = true;
+		}
+
 
 		//AI Scores
 

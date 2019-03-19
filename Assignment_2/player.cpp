@@ -27,6 +27,12 @@ Player::Player() {
 	topTailAngle = PLAYER_TOP_TAIL_ANGLE;
 	topTailRotationCount = PLAYER_TOP_TAIL_ROTATION_COUNT;
 	topTailUpwards = TOP_TAIL_UPWARDS;
+
+	earAngle = PLAYER_EAR_ANGLE;
+	earRotationCount = PLAYER_EAR_ROTATION_COUNT;
+	earUpwards = EAR_UPWARDS;
+
+	rotateColli = false;
 }
 
 void Player::render() {
@@ -47,15 +53,35 @@ void Player::render() {
 		glPushMatrix();
 			glTranslatef(0,0.33,0);
 			Shapes::circle(-((abs(playerX1) + abs(playerX2)) / 2), playerY1, 0.07, color);
+			//Ear of Pikachu - 3rd level
+			glPushMatrix();
+				//Rotate Ear
+				if (rotateColli) {
+					glTranslatef(-((abs(playerX1) + abs(playerX2)) / 2), playerY1, 0.0);
+					rotateEar();
+					glTranslatef(((abs(playerX1) + abs(playerX2)) / 2), -playerY1, 0.0);
+				}
+				color.setColor("f4dc26");
+				Color color_top;
+				color_top.setColor("5c3613");
+				//Position the Ear
+				glTranslatef(-((abs(playerX1) + abs(playerX2)) / 2), playerY1,0.0);
+				glRotatef(-35.0f,0.0f,0.0f,1.0f);
+				glTranslatef(((abs(playerX1) + abs(playerX2)) / 2), -playerY1,0.0);
+				glTranslatef(-0.09f,-0.01f,0.0);
+
+				Shapes::ellipse(-((abs(playerX1) + abs(playerX2))/2),playerY1,0.05,0.02,color,color_top);
+			glPopMatrix();
 		glPopMatrix();
 
 		//First Part of Tail - 2nd Level
 		glPushMatrix();	
 			//Rotate Bottom Tail
-		    glTranslatef(playerX1,playerY1,0);
-			rotateBottomTail();
-			glTranslatef(-playerX1, -playerY1, 0);
-
+			if(rotateColli){	
+				glTranslatef(playerX1,playerY1,0);
+				rotateBottomTail();
+				glTranslatef(-playerX1, -playerY1, 0);
+			}
 			color.setColor("f4dc26");
 			glTranslatef(0.04, 0.05, 0);
 			Shapes::triangle(playerX1, playerY1, playerX1-0.09, playerY1+0.06, playerX1-0.07, playerY1+0.11, color);
@@ -63,10 +89,11 @@ void Player::render() {
 			//Second Part of Tail - 3rd Level
 			glPushMatrix();
 				//Rotation Top Tail - Fourth Level
-				glTranslatef(playerX1, playerY1, 0); //Translate to Origin
-				rotateTopTail();
-				glTranslatef(-playerX1, -playerY1, 0); //Translate Back
-
+				if (rotateColli) {
+					glTranslatef(playerX1, playerY1, 0); //Translate to Origin
+					rotateTopTail();
+					glTranslatef(-playerX1, -playerY1, 0); //Translate Back
+				}
 				color.setColor("5c3613");
 				glTranslatef(-0.07, 0.06, 0);
 				Shapes::triangle(playerX1, playerY1, playerX1 - 0.02, playerY1 + 0.12, playerX1 + 0.03, playerY1 + 0.15, color);
@@ -119,7 +146,9 @@ int Player::getScore() {
 	return score;
 }
 
+
 void Player::rotateBottomTail() {
+
 
 	if (bottomTailUpwards) {
 		glRotatef(bottomTailAngle += 0.5f, 0.0f, 0.0f, 1.0f);
@@ -130,6 +159,8 @@ void Player::rotateBottomTail() {
 		--bottomTailRotationCount;
 	}
 
+	totalBtmTailRotCount++;
+
 	if (bottomTailRotationCount == 60) {
 		bottomTailUpwards = false;
 	}
@@ -137,24 +168,62 @@ void Player::rotateBottomTail() {
 		bottomTailUpwards = true;
 	}
 
+	if (totalBtmTailRotCount == 1800) {
+		rotateColli = false;
+		totalBtmTailRotCount = 0;
+	}
 }
 
 void Player::rotateTopTail() {
 
+	
 	if (topTailUpwards) {
 		glRotatef(topTailAngle += 0.8f, 0.0f, 0.0f, 1.0f);
 		++topTailRotationCount;
+
 	}
 	else {
 		glRotatef(topTailAngle -= 0.8f, 0.0f, 0.0f, 1.0f);
 		--topTailRotationCount;
 	}
+	totalTopTailRotCount++;
 
 	if (topTailRotationCount == 10) {
 		topTailUpwards = false;
 	}
 	else if (topTailRotationCount == 0) {
 		topTailUpwards = true;
+	}
+
+	if (totalTopTailRotCount == 300) {
+		rotateColli = false;
+		totalTopTailRotCount = 0;
+	}
+
+}
+
+void Player::rotateEar() {
+	if (earUpwards) {
+		glRotatef(earAngle += 0.08f, 0.0f, 0.0f, 1.0f);
+		++earRotationCount;
+
+	}
+	else {
+		glRotatef(earAngle -= 0.08f, 0.0f, 0.0f, 1.0f);
+		--earRotationCount;
+	}
+	totalEarRotCount++;
+
+	if (earRotationCount == 100) {
+		earUpwards = false;
+	}
+	else if (earRotationCount == 0) {
+		earUpwards = true;
+	}
+
+	if (totalEarRotCount == 3000) {
+		rotateColli = false;
+		totalEarRotCount = 0;
 	}
 
 }

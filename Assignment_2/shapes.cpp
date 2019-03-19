@@ -61,15 +61,16 @@ void Shapes::boundaryBox(double x1, double y1, double x2, double y2,Color color)
 
 void Shapes::electricity(double x1, double y1,double x2,double y2,Color color) {
 
-	double previousX = x1;
-
 	glColor3f(SETCOLOR(color));
 	glBegin(GL_LINE_STRIP);
 
-	for (double i = x1; i <= x2; i += (abs(x2) - abs(previousX)) * ((double)rand() / (double)RAND_MAX) + abs(previousX))
+	for (double i = x1; i <= x2; i += 0.02)
 	{
-		glVertex2f(i,  (abs(y2+0.05) - abs((y2-0.02))) * ((double)rand() / (double)RAND_MAX) + abs(y2-0.02));
-		previousX = i;
+		if(y2 > y1)
+			glVertex2f(i,  (y2+0.06 - y1) * ((double)rand() / (double)RAND_MAX) + y1);
+		else {
+			glVertex2f(i, (y1+0.06 - y2) * ((double)rand() / (double)RAND_MAX) + y2);
+		}
 		
 	}
 	glEnd();
@@ -84,6 +85,37 @@ void Shapes::triangle(double x1, double y1, double x2, double y2, double x3, dou
 		glVertex3f(x3, y3,0);
 	glEnd();
 }
+
+void Shapes::ellipse(double cx, double cy, double radiusX,double radiusY,Color color_btm,Color color_top) {
+
+	float theta = 2 * PI / 10;
+	float c = cosf(theta);
+	float s = sinf(theta);
+	float t;
+
+	float x = 1;
+	float y = 0;
+
+	glBegin(GL_TRIANGLE_FAN);
+	for (int ii = 0; ii < 10; ii++)
+	{
+
+		if (ii % 2 == 0)
+			glColor3f(SETCOLOR(color_top));
+		else
+			glColor3f(SETCOLOR(color_btm));
+
+		//apply radius and offset
+		glVertex2f(x * radiusX + cx, y * radiusY + cy);//output vertex 
+
+		//apply the rotation matrix
+		t = x;
+		x = c * x - s * y;
+		y = s * t + c * y;
+	}
+	glEnd();
+}
+
 
 Shapes::~Shapes()
 {

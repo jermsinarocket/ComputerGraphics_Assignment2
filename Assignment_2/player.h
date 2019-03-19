@@ -34,6 +34,10 @@
 #define PLAYER_TOP_TAIL_ROTATION_COUNT 0
 #define TOP_TAIL_UPWARDS TRUE
 
+#define PLAYER_EAR_ANGLE 1.0
+#define PLAYER_EAR_ROTATION_COUNT 0
+#define EAR_UPWARDS TRUE
+
 class Player
 {
 public:
@@ -49,6 +53,7 @@ public:
 	int getScore();
 	void rotateBottomTail();
 	void rotateTopTail();
+	void rotateEar();
 	virtual ~Player();
 
 	double playerX1;
@@ -56,6 +61,7 @@ public:
 	double playerX2;
 	double playerY2;
 	double speed;
+	bool rotateColli;
 
 	Text playerScore;
 	Collision collision;
@@ -66,10 +72,17 @@ private:
 	float bottomTailAngle;
 	int bottomTailRotationCount;
 	bool bottomTailUpwards;
+	int totalBtmTailRotCount;
 
 	float topTailAngle;
 	int topTailRotationCount;
 	bool topTailUpwards;
+	int totalTopTailRotCount;
+
+	float earAngle;
+	int  earRotationCount;
+	bool earUpwards;
+	int totalEarRotCount;
 };
 
 #endif // PLAYER_H
