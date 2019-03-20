@@ -62,10 +62,20 @@ void Shapes::boundaryBox(double x1, double y1, double x2, double y2,Color color)
 void Shapes::electricity(double x1, double y1,double x2,double y2,Color color) {
 
 	glColor3f(SETCOLOR(color));
+
+	Color scolor;
+	scolor.setColor("00D5FF");
 	glBegin(GL_LINE_STRIP);
 
 	for (double i = x1; i <= x2; i += 0.02)
 	{
+		int r = rand() % 10;
+		if (r % 2 == 0) {
+			glColor3f(SETCOLOR(color));
+		}
+		else {
+			glColor3f(SETCOLOR(scolor));
+		}
 		if(y2 > y1)
 			glVertex2f(i,  (y2+0.06 - y1) * ((double)rand() / (double)RAND_MAX) + y1);
 		else {
