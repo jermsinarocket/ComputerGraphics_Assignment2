@@ -31,7 +31,6 @@ void Background::render() {
 
 		moveCloud();
 
-		//First Cloud
 		cloud();
 
 		//Second Cloud
