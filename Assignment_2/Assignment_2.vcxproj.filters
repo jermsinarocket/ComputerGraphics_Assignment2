@@ -97,9 +97,6 @@
     <Media Include="include\clickStart.wav">
       <Filter>Resource Files</Filter>
     </Media>
-    <Media Include="include\openingTheme.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
     <Media Include="include\playerBallBounce.wav">
       <Filter>Resource Files</Filter>
     </Media>
@@ -109,10 +106,18 @@
     <Media Include="include\winSound.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="include\openingTheme.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment_2.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wave7.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ SoundController::SoundController()
 
 void SoundController::startTheme() {
 
-		PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC | SND_LOOP);
 }
 
 
