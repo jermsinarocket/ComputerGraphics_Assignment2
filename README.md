@@ -1,4 +1,4 @@
-# CSED451 Computer Graphics Assignment 2 - Work in Progress
+# CSED451 Computer Graphics Assignment 2 (Spring 2019, POSTECH)
 
 Enhancing a 2D volleyball game usihng Hierarchical Model
 _(This is an enhancedment to my previous [Computer Graphics Assignment 1](https://github.com/jermsinarocket/ComputerGraphics_Assignment1))_
