@@ -13,13 +13,13 @@ Assignment Report.docx
 
 MVS Files
 ----------
-Assignment_1\
-          -Assignment_1.sln
-          -Assignment1.vcxproj
+Assignment_2\
+          -Assignment_2.sln
+          -Assignment2.vcxproj
 
 Header Files
 -------------
-Assignment_1\
+Assignment_2\
           -ai.h
           -background.h
 	  -ball.h	
@@ -35,7 +35,7 @@ Assignment_1\
 
 Implementation Files
 ---------------------
-Assignment_1\
+Assignment_2\
           -ai.cpp
           -background.cpp
 	  -ball.cpp	
@@ -51,7 +51,7 @@ Assignment_1\
 
 Dependencies
 ---------------
-Assignment_1\
+Assignment_2\
       include\
           -bounceSound.wav
 	  -clickStart.wav
@@ -75,9 +75,9 @@ Assignment_1\
 
 Executable
 -----------
-Assignment_1\
+Assignment_2\
       bin\
-          -Assigment_1.exe
+          -Assigment_2.exe
 
 
 ================
